@@ -14,7 +14,7 @@ import javax.security.auth.login.LoginException;
 public class Main {
     public static void main(String[] args) throws LoginException {
         String discordToken = System.getenv("DISCORD_TOKEN");
-        String nowPlaying = "Stardew Valley";
+        String nowPlaying = "with a cat";
 
         JDA jda = JDABuilder.createDefault(discordToken)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
