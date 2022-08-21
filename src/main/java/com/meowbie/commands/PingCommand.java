@@ -1,12 +1,14 @@
-package com.meowbie.events;
+package com.meowbie.commands;
 
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class PingEvent extends ListenerAdapter {
+public class PingCommand extends ListenerAdapter {
+    @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         String messageSent = event.getMessage().getContentRaw();
-        var channel = event.getChannel();
+        MessageChannelUnion channel = event.getChannel();
 
         if (messageSent.startsWith("!ping")) {
             channel.sendMessage("Pong!").queue();
