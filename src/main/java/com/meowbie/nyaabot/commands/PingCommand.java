@@ -1,4 +1,4 @@
-package com.meowbie.commands;
+package com.meowbie.nyaabot.commands;
 
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

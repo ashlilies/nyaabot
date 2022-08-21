@@ -1,8 +1,8 @@
-package com.meowbie;
+package com.meowbie.nyaabot;
 
-import com.meowbie.commands.CalculateCommand;
-import com.meowbie.events.HelloEvent;
-import com.meowbie.commands.PingCommand;
+import com.meowbie.nyaabot.commands.CalculateCommand;
+import com.meowbie.nyaabot.events.HelloEvent;
+import com.meowbie.nyaabot.commands.PingCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
