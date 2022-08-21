@@ -16,10 +16,11 @@ public class CalculateCommand extends ListenerAdapter {
         }
 
         if (messageContent.length != 4) {
-            String reply = "This is the calculate command!\n"
-                    + "Usage: "
-                    + "``!calculate [add/sub/mul/div] "
-                    + "<first_num> <second_num>``";
+            String reply = """
+                    This is the calculate command!
+                    Usage: ``calculate [add/sub/mul/div]\
+                    <first_num> <second_num>``
+                    """;
             channel.sendMessage(reply).queue();
             return;
         }

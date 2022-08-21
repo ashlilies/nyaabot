@@ -15,7 +15,7 @@ public class HelpCommand extends ListenerAdapter {
             String reply = """
                     Welcome to nyaabot by ashe#0001.
                     Available commands:
-                    ``!ping``
+                    ``!ping/pong/pung``
                     ``!calculate``
                     """;
             channel.sendMessage(reply).queue();
