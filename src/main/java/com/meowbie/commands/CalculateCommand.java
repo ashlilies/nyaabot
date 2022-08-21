@@ -18,7 +18,8 @@ public class CalculateCommand extends ListenerAdapter {
         if (messageContent.length != 4) {
             String reply = "This is the calculate command!\n"
                     + "Usage: "
-                    + "``!calculate [add/sub] <first_num> <second_num>``";
+                    + "``!calculate [add/sub/mul/div] "
+                    + "<first_num> <second_num>``";
             channel.sendMessage(reply).queue();
             return;
         }
@@ -35,6 +36,18 @@ public class CalculateCommand extends ListenerAdapter {
                 break;
             case "sub":
                 result = n1 - n2;
+                break;
+            case "mul":
+                result = n1 * n2;
+                break;
+            case "div":
+                if (n2 == 0) {
+                    channel.sendMessage("Error: division by zero!")
+                            .queue();
+                    return;
+                }
+
+                result = (double) n1 / n2;
                 break;
             default:
                 channel.sendMessage("Invalid operator '" + operator + "'.")
