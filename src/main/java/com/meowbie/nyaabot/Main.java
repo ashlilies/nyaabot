@@ -16,6 +16,11 @@ public class Main {
         String discordToken = System.getenv("DISCORD_TOKEN");
         String nowPlaying = "with a cat";
 
+        if (discordToken == null) {
+            System.err.println("Invalid DISCORD_TOKEN environment variable");
+            System.exit(1);
+        }
+
         JDA jda = JDABuilder.createDefault(discordToken)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                 .setActivity(Activity.playing(nowPlaying))
