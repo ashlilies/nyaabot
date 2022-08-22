@@ -13,22 +13,24 @@ public class HelpCommand extends ListenerAdapter {
         String message = event.getMessage().getContentRaw();
         MessageChannelUnion channel = event.getChannel();
 
-        if (message.startsWith("!help")) {
-            String welcomeText = "Welcome to nyaabot by ashe#0001.\n"
-                    + "Available commands:";
-            String pingText = "``!ping/pong/pung``";
-            String calculateText = "``!calculate`` - perform calculations";
-            String userInfoText = "``!userinfo`` - get user info by nickname";
-            String meowText = "``!meow`` - get a random cat GIF";
-
-            StringJoiner sj = new StringJoiner("\n");
-            sj.add(welcomeText);
-            sj.add(pingText);
-            sj.add(calculateText);
-            sj.add(userInfoText);
-            sj.add(meowText);
-            String reply = sj.toString();
-            channel.sendMessage(reply).queue();
+        if (!message.startsWith("!help")) {
+            return;
         }
+
+        String welcomeText = "Welcome to nyaabot by ashe#0001.\n"
+                + "Available commands:";
+        String pingText = "``!ping/pong/pung``";
+        String calculateText = "``!calculate`` - perform calculations";
+        String userInfoText = "``!userinfo`` - get user info by nickname";
+        String meowText = "``!meow`` - get a random cat GIF";
+
+        StringJoiner sj = new StringJoiner("\n");
+        sj.add(welcomeText);
+        sj.add(pingText);
+        sj.add(calculateText);
+        sj.add(userInfoText);
+        sj.add(meowText);
+        String reply = sj.toString();
+        channel.sendMessage(reply).queue();
     }
 }
