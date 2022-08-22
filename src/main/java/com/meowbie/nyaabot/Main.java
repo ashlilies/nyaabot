@@ -30,5 +30,6 @@ public class Main {
         jda.addEventListener(new CalculateCommand());
         jda.addEventListener(new UserInfoCommand());
         jda.addEventListener(new MeowCommand());
+        jda.addEventListener(new DeveloperCommand());
     }
 }
