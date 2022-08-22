@@ -55,9 +55,16 @@ public class DeveloperCommand extends ListenerAdapter {
                 sj.add(messageContent[i]);
             }
 
-            setStatus(event, sj.toString());
-            channel.sendMessage(
-                    "Successfully updated status to " + sj)
+            String status = sj.toString();
+
+            if (status.length() > 128) {
+                channel.sendMessage("Status can't be longer than 128 "
+                        + "characters!").queue();
+                return;
+            }
+
+            setStatus(event, status);
+            channel.sendMessage("Successfully updated status to " + status)
                     .queue();
             break;
         default:
