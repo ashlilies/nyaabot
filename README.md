@@ -1,6 +1,8 @@
 # NyaaBot
 A Discord bot providing general utilities such as calculation, and other fun
-commands!
+commands, including cat image generation!
+
+Default prefix: '!' - run '!help' to see all commands
 
 Technologies used: JDA, Maven, Java 17.
 
