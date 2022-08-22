@@ -12,12 +12,10 @@ public class HelpCommand extends ListenerAdapter {
         MessageChannelUnion channel = event.getChannel();
 
         if (message.startsWith("!help")) {
-            String reply = """
-                    Welcome to nyaabot by ashe#0001.
-                    Available commands:
-                    ``!ping/pong/pung``
-                    ``!calculate``
-                    """;
+            String reply = "Welcome to nyaabot by ashe#0001.\n"
+                     + "Available commands:\n"
+                     + "``!ping/pong/pung``"
+                     + "``!calculate``";
             channel.sendMessage(reply).queue();
         }
     }
