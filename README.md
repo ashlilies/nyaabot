@@ -2,7 +2,7 @@
 A Discord bot providing general utilities such as calculation, and other fun
 commands, including cat image generation!
 
-Default prefix: ```!``` - run ```!help``` to see all commands
+Default prefix: ```!``` - run ```!help``` to see all user commands
 
 Technologies used: JDA, Maven, Java 17.
 
