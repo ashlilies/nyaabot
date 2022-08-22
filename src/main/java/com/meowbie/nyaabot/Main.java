@@ -2,6 +2,7 @@ package com.meowbie.nyaabot;
 
 import com.meowbie.nyaabot.commands.CalculateCommand;
 import com.meowbie.nyaabot.commands.HelpCommand;
+import com.meowbie.nyaabot.commands.UserInfoCommand;
 import com.meowbie.nyaabot.events.HelloEvent;
 import com.meowbie.nyaabot.commands.PingCommand;
 import net.dv8tion.jda.api.JDA;
@@ -30,5 +31,6 @@ public class Main {
         jda.addEventListener(new HelpCommand());
         jda.addEventListener(new PingCommand());
         jda.addEventListener(new CalculateCommand());
+        jda.addEventListener(new UserInfoCommand());
     }
 }
