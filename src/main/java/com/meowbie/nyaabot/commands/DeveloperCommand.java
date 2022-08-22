@@ -42,7 +42,7 @@ public class DeveloperCommand extends ListenerAdapter {
 
         switch (messageContent[1]) {
         case "shutdown":
-            channel.sendMessage("Shutting down bot...").queue();
+            channel.sendMessage("Shutting down bot...").complete();
             shutDownBot(user.getId());
             break;
         case "status":
@@ -50,11 +50,11 @@ public class DeveloperCommand extends ListenerAdapter {
                 sendHelpText(event, channel);
                 return;
             }
+
             StringJoiner sj = new StringJoiner(" ");
             for (int i = 2; i < messageContent.length; i++) {
                 sj.add(messageContent[i]);
             }
-
             String status = sj.toString();
 
             if (status.length() > 128) {
