@@ -14,7 +14,7 @@ public class HelpCommand extends ListenerAdapter {
         if (message.startsWith("!help")) {
             String reply = "Welcome to nyaabot by ashe#0001.\n"
                      + "Available commands:\n"
-                     + "``!ping/pong/pung``"
+                     + "``!ping/pong/pung``\n"
                      + "``!calculate``";
             channel.sendMessage(reply).queue();
         }
