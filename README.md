@@ -13,7 +13,7 @@ For database access (including server-specific settings),
 set up DB_URL with a JDBC connection string, DB_USER and
 DB_PASSWORD environment variables with the database credentials respectively. 
 
-Then run nyaabot.sql to generate the schema and tables. 
+Then run nyaabot.sql to generate the schema and tables (tested on MySQL only). 
 
 To enable developer (bot owner) commands, set environment variable BOT_OWNER
 to your user ID. Then access the menu with ```!dev```.
