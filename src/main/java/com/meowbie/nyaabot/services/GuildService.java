@@ -33,7 +33,7 @@ public class GuildService {
     }
 
     public void updateGuildPrefix(Guild guild, String newPrefix) {
-        GuildSetting gs = dao.findGuildSetting(guild.getId());
+        GuildSetting gs = loadGuild(guild);
         gs.setPrefix(newPrefix);
         dao.updateGuildSetting(gs);
     }
