@@ -4,7 +4,7 @@ commands, including cat image generation!
 
 Default prefix: ```!``` - run ```!help``` to see all user commands
 
-Technologies used: JDA, Maven, Java 17.
+Technologies used: JDA, Maven, Java 11.
 
 To run, set up an environment variable DISCORD_TOKEN with the appropriate
 bot token.
