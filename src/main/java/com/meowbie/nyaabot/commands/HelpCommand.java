@@ -1,11 +1,14 @@
 package com.meowbie.nyaabot.commands;
 
+import com.meowbie.nyaabot.Constants;
+import com.meowbie.nyaabot.utils.EmbedUtil;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.StringJoiner;
 
 public class HelpCommand extends ListenerAdapter {
     @Override
@@ -17,20 +20,38 @@ public class HelpCommand extends ListenerAdapter {
             return;
         }
 
-        String welcomeText = "Welcome to nyaabot by ashe#0001.\n"
-                + "Available commands:";
-        String pingText = "``!ping/pong/pung``";
-        String calculateText = "``!calculate`` - perform calculations";
-        String userInfoText = "``!userinfo`` - get user info by nickname";
-        String meowText = "``!meow`` - get a random cat GIF";
+        channel.sendMessageEmbeds(getHelpEmbed(event.getAuthor())).queue();
+    }
 
-        StringJoiner sj = new StringJoiner("\n");
-        sj.add(welcomeText);
-        sj.add(pingText);
-        sj.add(calculateText);
-        sj.add(userInfoText);
-        sj.add(meowText);
-        String reply = sj.toString();
-        channel.sendMessage(reply).queue();
+    private MessageEmbed getHelpEmbed(User user) {
+        String embedTitle = "Welcome to nyaabot by ashe#0001";
+        String embedDesc = "Available commands";
+        String pingText = "ping/pong/pung";
+        String pingDesc = "Check if I'm alive";
+        String calculateText = "calculate [add/sub/mul/div] <first_num> "
+                + "<second_num>";
+        String calculateDesc = "Perform calculations";
+        String userInfoText = "userinfo <name>";
+        String userInfoDesc = "Get user info by nickname";
+        String meowText = "meow";
+        String meowDesc = "Get a random cat GIF";
+        String devText = "dev";
+        String devDesc = "Access developer/bot owner commands";
+
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setTitle(embedTitle);
+        builder.setDescription(embedDesc);
+        builder.addField(calculateText, calculateDesc, false);
+        builder.addField(pingText, pingDesc, false);
+        builder.addField(userInfoText, userInfoDesc, false);
+        builder.addField(meowText, meowDesc, false);
+
+        if (user.getId().equals(Constants.BOT_OWNER_ID)) {
+            builder.addField(devText, devDesc, false);
+        }
+
+        EmbedUtil.formatEmbed(builder, user);
+
+        return builder.build();
     }
 }

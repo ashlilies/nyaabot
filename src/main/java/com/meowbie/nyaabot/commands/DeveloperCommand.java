@@ -1,5 +1,6 @@
 package com.meowbie.nyaabot.commands;
 
+import com.meowbie.nyaabot.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
@@ -18,8 +19,6 @@ import java.util.StringJoiner;
  * This command provides miscellaneous administrative tools for the bot owner.
  */
 public class DeveloperCommand extends ListenerAdapter {
-    private static final String BOT_OWNER_ID = System.getenv("BOT_OWNER");
-
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         String message = event.getMessage().getContentRaw();
@@ -27,7 +26,7 @@ public class DeveloperCommand extends ListenerAdapter {
         MessageChannelUnion channel = event.getChannel();
         User user = event.getAuthor();
 
-        if (!user.getId().equals(BOT_OWNER_ID)) {
+        if (!user.getId().equals(Constants.BOT_OWNER_ID)) {
             return;
         }
 

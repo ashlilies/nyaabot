@@ -11,15 +11,14 @@ import javax.security.auth.login.LoginException;
 
 public class Main {
     public static void main(String[] args) throws LoginException {
-        String discordToken = System.getenv("DISCORD_TOKEN");
         String nowPlaying = "with a cat";
 
-        if (discordToken == null) {
+        if (Constants.DISCORD_TOKEN == null) {
             System.err.println("Invalid DISCORD_TOKEN environment variable");
             System.exit(1);
         }
 
-        JDA jda = JDABuilder.createDefault(discordToken)
+        JDA jda = JDABuilder.createDefault(Constants.DISCORD_TOKEN)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                 .setActivity(Activity.playing(nowPlaying))
                 .build();
