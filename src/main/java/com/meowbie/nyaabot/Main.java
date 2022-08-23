@@ -11,8 +11,6 @@ import javax.security.auth.login.LoginException;
 
 public class Main {
     public static void main(String[] args) throws LoginException {
-        String nowPlaying = "with a cat | !help";
-
         if (Constants.DISCORD_TOKEN == null) {
             System.err.println("Invalid DISCORD_TOKEN environment variable");
             System.exit(1);
@@ -20,7 +18,7 @@ public class Main {
 
         JDA jda = JDABuilder.createDefault(Constants.DISCORD_TOKEN)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
-                .setActivity(Activity.playing(nowPlaying))
+                .setActivity(Activity.playing(Constants.DEFAULT_NOW_PLAYING))
                 .build();
 
         jda.addEventListener(new HelloEvent());
