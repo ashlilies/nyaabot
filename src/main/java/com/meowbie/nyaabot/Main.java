@@ -1,7 +1,7 @@
 package com.meowbie.nyaabot;
 
 import com.meowbie.nyaabot.commands.*;
-import com.meowbie.nyaabot.events.HelloEvent;
+import com.meowbie.nyaabot.events.PingEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -21,12 +21,13 @@ public class Main {
                 .setActivity(Activity.playing(Constants.DEFAULT_NOW_PLAYING))
                 .build();
 
-        jda.addEventListener(new HelloEvent());
         jda.addEventListener(new HelpCommand());
         jda.addEventListener(new PingCommand());
         jda.addEventListener(new CalculateCommand());
         jda.addEventListener(new UserInfoCommand());
         jda.addEventListener(new MeowCommand());
         jda.addEventListener(new DeveloperCommand());
+        jda.addEventListener(new PingEvent());
+        jda.addEventListener(new Listener());
     }
 }

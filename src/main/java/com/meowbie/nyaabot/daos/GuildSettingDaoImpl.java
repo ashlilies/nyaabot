@@ -2,10 +2,7 @@ package com.meowbie.nyaabot.daos;
 
 import com.meowbie.nyaabot.models.GuildSetting;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
     private static final String FIND_GUILD_SETTING =
@@ -48,27 +45,25 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
     /**
      * Creates a new guild in the database
      * @param guildSetting The GuildSetting object to be inserted
-     * @return Number of affected rows
      */
     @Override
-    public int createGuildSetting(GuildSetting guildSetting) {
+    public void createGuildSetting(GuildSetting guildSetting) {
         Connection conn = null;
         PreparedStatement stmt = null;
 
         try {
             conn = getConnection();
-            stmt = conn.prepareStatement(CREATE_GUILD_SETTING);
+            stmt = conn.prepareStatement(CREATE_GUILD_SETTING,
+                                         Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, guildSetting.getGuildId());
             stmt.setString(2, guildSetting.getPrefix());
 
-            int result = stmt.executeUpdate();
+            stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
 
             if (rs.next()) {
                 guildSetting.setId(rs.getInt(1));
             }
-
-            return result;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -80,10 +75,9 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
     /**
      * Updates a guild's settings
      * @param guildSetting The GuildSetting object with new details
-     * @return Number of affected rows
      */
     @Override
-    public int updateGuildSetting(GuildSetting guildSetting) {
+    public void updateGuildSetting(GuildSetting guildSetting) {
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -94,7 +88,7 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
             stmt.setString(2, guildSetting.getPrefix());
             stmt.setInt(3, guildSetting.getId());
 
-            return stmt.executeUpdate();
+            stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
