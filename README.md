@@ -4,10 +4,13 @@ commands, including cat image generation!
 
 Default prefix: ```!``` - run ```!help``` to see all user commands
 
-Technologies used: JDA, Maven, Java 11.
+Technologies used: JDA, Maven, Java 11, MySQL. 
 
 To run, set up an environment variable DISCORD_TOKEN with the appropriate
-bot token.
+bot token. 
+
+Then set up DB_URL with a JDBC connection string, DB_USER and
+DB_PASSWORD environment variables with the database credentials. 
 
 To enable developer (bot owner) commands, set environment variable BOT_OWNER
 to your user ID. Then access the menu with ```!dev```.
