@@ -9,7 +9,7 @@ Technologies used: JDA, Maven, Java 11, MySQL.
 To run, set up an environment variable DISCORD_TOKEN with the appropriate
 bot token. 
 
-For database access (including per-server configuration), 
+For database access (including server-specific settings), 
 set up DB_URL with a JDBC connection string, DB_USER and
 DB_PASSWORD environment variables with the database credentials respectively. 
 
