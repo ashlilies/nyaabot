@@ -1,5 +1,6 @@
 package com.meowbie.nyaabot.commands;
 
+import com.meowbie.nyaabot.Constants;
 import com.meowbie.nyaabot.services.GuildService;
 import com.meowbie.nyaabot.utils.EmbedUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -34,12 +35,29 @@ public class ServerCommand extends ListenerAdapter {
 
         switch (messageContent[1]) {
         case "prefix":
+            if (messageContent.length == 2) {  // reset server prefix
+                String newPrefix = "!";
+                svc.updateGuildPrefix(event.getGuild(), newPrefix);
+                channel.sendMessage("Successfully reset server prefix to **"
+                                + newPrefix + "**")
+                        .queue();
+                return;
+            }
+
             if (messageContent.length != 3) {
                 sendHelpText(event, channel);
                 return;
             }
 
             String newPrefix = messageContent[2];
+
+            if (newPrefix.length() > Constants.MAX_PREFIX_LENGTH) {
+                channel.sendMessage("Maximum prefix length is "
+                                + Constants.MAX_PREFIX_LENGTH + " characters!")
+                        .queue();
+                return;
+            }
+
             svc.updateGuildPrefix(event.getGuild(), newPrefix);
             channel.sendMessage("Successfully updated server prefix to **"
                             + newPrefix + "**")
