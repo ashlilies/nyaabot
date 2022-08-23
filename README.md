@@ -12,6 +12,7 @@ bot token.
 For database access (including server-specific settings), 
 set up DB_URL with a JDBC connection string, DB_USER and
 DB_PASSWORD environment variables with the database credentials respectively. 
+
 Then run nyaabot.sql to generate the schema and tables. 
 
 To enable developer (bot owner) commands, set environment variable BOT_OWNER
