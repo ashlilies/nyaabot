@@ -11,7 +11,7 @@ import javax.security.auth.login.LoginException;
 
 public class Main {
     public static void main(String[] args) throws LoginException {
-        String nowPlaying = "with a cat";
+        String nowPlaying = "with a cat | !help";
 
         if (Constants.DISCORD_TOKEN == null) {
             System.err.println("Invalid DISCORD_TOKEN environment variable");

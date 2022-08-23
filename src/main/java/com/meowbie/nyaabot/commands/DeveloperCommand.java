@@ -87,15 +87,17 @@ public class DeveloperCommand extends ListenerAdapter {
 
     private void sendHelpText(MessageReceivedEvent e,
                               MessageChannel responseChannel) {
-        String titleText = "Developer commands available to you:";
-        String shutdownText = "``shutdown``";
+        String embedTitle = "Developer commands available to you";
+        String embedDesc = "All developer commands start with *dev*";
+        String shutdownText = "shutdown";
         String shutdownDesc = "Shuts down the bot immediately";
-        String statusText = "``status <newStatus>``";
+        String statusText = "status <newStatus>";
         String statusDesc = "Set my playing activity";
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.PINK);
-        eb.setTitle(titleText);
+        eb.setTitle(embedTitle);
+        eb.setDescription(embedDesc);
         eb.addField(shutdownText, shutdownDesc, false);
         eb.addField(statusText, statusDesc, false);
         eb.setFooter(new Date().toString(), e.getAuthor().getAvatarUrl());
