@@ -27,4 +27,14 @@ public class GuildService {
 
         return gs;
     }
+
+    public String getGuildPrefix(Guild guild) {
+        return loadGuild(guild).getPrefix();
+    }
+
+    public void updateGuildPrefix(Guild guild, String newPrefix) {
+        GuildSetting gs = dao.findGuildSetting(guild.getId());
+        gs.setPrefix(newPrefix);
+        dao.updateGuildSetting(gs);
+    }
 }

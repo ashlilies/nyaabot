@@ -29,5 +29,6 @@ public class Main {
         jda.addEventListener(new DeveloperCommand());
         jda.addEventListener(new PingEvent());
         jda.addEventListener(new Listener());
+        jda.addEventListener(new ServerCommand());
     }
 }

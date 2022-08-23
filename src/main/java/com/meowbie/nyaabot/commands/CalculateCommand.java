@@ -1,5 +1,6 @@
 package com.meowbie.nyaabot.commands;
 
+import com.meowbie.nyaabot.services.GuildService;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -11,7 +12,10 @@ public class CalculateCommand extends ListenerAdapter {
         String[] messageContent = message.split(" ");
         MessageChannelUnion channel = e.getChannel();
 
-        if (!message.startsWith("!calculate")) {
+        GuildService svc = new GuildService();
+        String prefix = svc.getGuildPrefix(e.getGuild());
+
+        if (!message.startsWith(prefix + "calculate")) {
             return;
         }
 

@@ -1,5 +1,6 @@
 package com.meowbie.nyaabot.commands;
 
+import com.meowbie.nyaabot.services.GuildService;
 import com.meowbie.nyaabot.utils.ColorUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
@@ -24,7 +25,10 @@ public class MeowCommand extends ListenerAdapter {
         MessageChannelUnion channel = event.getChannel();
         User requester = event.getAuthor();
 
-        if (!message.startsWith("!meow")) {
+        GuildService svc = new GuildService();
+        String prefix = svc.getGuildPrefix(event.getGuild());
+
+        if (!message.startsWith(prefix + "meow")) {
             return;
         }
 

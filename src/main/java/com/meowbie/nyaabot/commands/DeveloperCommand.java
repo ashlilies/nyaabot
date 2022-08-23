@@ -1,10 +1,10 @@
 package com.meowbie.nyaabot.commands;
 
 import com.meowbie.nyaabot.Constants;
+import com.meowbie.nyaabot.services.GuildService;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -26,11 +26,14 @@ public class DeveloperCommand extends ListenerAdapter {
         MessageChannelUnion channel = event.getChannel();
         User user = event.getAuthor();
 
+        GuildService svc = new GuildService();
+        String prefix = svc.getGuildPrefix(event.getGuild());
+
         if (!user.getId().equals(Constants.BOT_OWNER_ID)) {
             return;
         }
 
-        if (!(message.startsWith("!dev"))) {
+        if (!(message.startsWith(prefix + "dev"))) {
             return;
         }
 
@@ -86,7 +89,7 @@ public class DeveloperCommand extends ListenerAdapter {
     }
 
     private void sendHelpText(MessageReceivedEvent e,
-                              MessageChannel responseChannel) {
+                              MessageChannelUnion responseChannel) {
         String embedTitle = "Developer commands available to you";
         String embedDesc = "All developer commands start with *dev*";
         String shutdownText = "shutdown";

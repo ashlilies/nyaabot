@@ -1,5 +1,6 @@
 package com.meowbie.nyaabot.commands;
 
+import com.meowbie.nyaabot.services.GuildService;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
@@ -19,7 +20,10 @@ public class UserInfoCommand extends ListenerAdapter {
         String[] messageContent = message.split(" ");
         MessageChannelUnion channel = event.getChannel();
 
-        if (!message.startsWith("!userinfo")) {
+        GuildService svc = new GuildService();
+        String prefix = svc.getGuildPrefix(event.getGuild());
+
+        if (!message.startsWith(prefix + "userinfo")) {
             return;
         }
 
