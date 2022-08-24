@@ -18,4 +18,4 @@ Then run nyaabot.sql to generate the schema and tables (tested on MySQL only).
 To enable developer (bot owner) commands, set environment variable BOT_OWNER
 to your user ID. Then access the menu with ```!dev```.
 
-Copyright (c) 2022, Ashlee Tan
+Copyright (c) 2022, Ashlee Tan. Licensed under the GPL. 
