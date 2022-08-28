@@ -13,7 +13,7 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
             "UPDATE guild_setting SET guild_id = ?, prefix = ? WHERE id = ?";
 
     @Override
-    public GuildSetting findGuildSetting(String guildId) {
+    public GuildSetting find(String guildId) {
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -47,7 +47,7 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
      * @param guildSetting The GuildSetting object to be inserted
      */
     @Override
-    public void createGuildSetting(GuildSetting guildSetting) {
+    public void create(GuildSetting guildSetting) {
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -77,7 +77,7 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
      * @param guildSetting The GuildSetting object with new details
      */
     @Override
-    public void updateGuildSetting(GuildSetting guildSetting) {
+    public void save(GuildSetting guildSetting) {
         Connection conn = null;
         PreparedStatement stmt = null;
 

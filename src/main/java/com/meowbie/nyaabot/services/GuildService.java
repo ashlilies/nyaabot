@@ -16,13 +16,13 @@ public class GuildService {
      * @return Guild settings
      */
     public GuildSetting loadGuild(Guild guild) {
-        GuildSetting gs = dao.findGuildSetting(guild.getId());
+        GuildSetting gs = dao.find(guild.getId());
 
         if (gs == null) {
             gs = new GuildSetting();
             gs.setGuildId(guild.getId());
             gs.setPrefix(Constants.DEFAULT_PREFIX);
-            dao.createGuildSetting(gs);
+            dao.create(gs);
         }
 
         return gs;
@@ -35,6 +35,6 @@ public class GuildService {
     public void updateGuildPrefix(Guild guild, String newPrefix) {
         GuildSetting gs = loadGuild(guild);
         gs.setPrefix(newPrefix);
-        dao.updateGuildSetting(gs);
+        dao.save(gs);
     }
 }
