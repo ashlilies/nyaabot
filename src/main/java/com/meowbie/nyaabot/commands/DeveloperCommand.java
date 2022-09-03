@@ -97,16 +97,18 @@ public class DeveloperCommand extends ListenerAdapter {
                                MessageChannelUnion responseChannel) {
         JDA jda = e.getJDA();
         List<Guild> guilds = jda.getGuilds();
-        guilds.sort((a, b) -> b.getMembers().size() - a.getMembers().size());
+        List<Guild> sortedGuilds = new ArrayList<>(guilds);
+        sortedGuilds.sort((a, b) ->
+                b.getMembers().size() - a.getMembers().size());
 
-        String embedTitle = "I am in " + guilds.size() + " servers!";
+        String embedTitle = "I am in " + sortedGuilds.size() + " servers!";
         String embedDesc = "These are the servers";
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle(embedTitle);
         eb.setDescription(embedDesc);
 
-        for (Guild guild : guilds) {
+        for (Guild guild : sortedGuilds) {
             String guildDesc = guild.getMembers()
                     + " members (" + guild.getId() + ")";
 
