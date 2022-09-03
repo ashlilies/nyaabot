@@ -14,14 +14,9 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
 
     @Override
     public GuildSetting find(String guildId) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-
-        try {
-            conn = getConnection();
-            stmt = conn.prepareStatement(FIND_QUERY);
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(FIND_QUERY)) {
             stmt.setString(1, guildId);
-
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -36,25 +31,20 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            close(stmt);
-            close(conn);
         }
     }
 
     /**
      * Creates a new guild in the database
+     *
      * @param guildSetting The GuildSetting object to be inserted
      */
     @Override
     public void create(GuildSetting guildSetting) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-
-        try {
-            conn = getConnection();
-            stmt = conn.prepareStatement(CREATE_QUERY,
-                                         Statement.RETURN_GENERATED_KEYS);
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     CREATE_QUERY,
+                     Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, guildSetting.getGuildId());
             stmt.setString(2, guildSetting.getPrefix());
 
@@ -66,24 +56,18 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            close(stmt);
-            close(conn);
         }
     }
 
     /**
      * Updates a guild's settings
+     *
      * @param guildSetting The GuildSetting object with new details
      */
     @Override
     public void save(GuildSetting guildSetting) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-
-        try {
-            conn = getConnection();
-            stmt = conn.prepareStatement(UPDATE_QUERY);
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(UPDATE_QUERY)) {
             stmt.setString(1, guildSetting.getGuildId());
             stmt.setString(2, guildSetting.getPrefix());
             stmt.setInt(3, guildSetting.getId());
@@ -91,9 +75,6 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            close(stmt);
-            close(conn);
         }
     }
 }

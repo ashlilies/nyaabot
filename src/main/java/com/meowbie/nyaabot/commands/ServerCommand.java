@@ -33,8 +33,7 @@ public class ServerCommand extends ListenerAdapter {
             return;
         }
 
-        switch (messageContent[1]) {
-        case "prefix":
+        if (messageContent[1].equals("prefix")) {
             if (messageContent.length == 2) {  // reset server prefix
                 String newPrefix = "!";
                 svc.updateGuildPrefix(event.getGuild(), newPrefix);
@@ -62,10 +61,8 @@ public class ServerCommand extends ListenerAdapter {
             channel.sendMessage("Successfully updated server prefix to **"
                             + newPrefix + "**")
                     .queue();
-            break;
-        default:
+        } else {
             sendHelpText(event, channel);
-            break;
         }
     }
 
