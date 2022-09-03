@@ -17,7 +17,8 @@ public class Main {
         }
 
         JDA jda = JDABuilder.createDefault(Constants.DISCORD_TOKEN)
-                .enableIntents(GatewayIntent.MESSAGE_CONTENT)
+                .enableIntents(GatewayIntent.MESSAGE_CONTENT,
+                               GatewayIntent.GUILD_MEMBERS)
                 .setActivity(Activity.playing(Constants.DEFAULT_NOW_PLAYING))
                 .build();
 
