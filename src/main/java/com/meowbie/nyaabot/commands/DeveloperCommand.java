@@ -109,7 +109,7 @@ public class DeveloperCommand extends ListenerAdapter {
         eb.setDescription(embedDesc);
 
         for (Guild guild : sortedGuilds) {
-            String guildDesc = guild.getMembers()
+            String guildDesc = guild.getMembers().size()
                     + " members (" + guild.getId() + ")";
 
             eb.addField(guild.getName(), guildDesc, false);
