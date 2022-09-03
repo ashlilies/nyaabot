@@ -2,18 +2,20 @@ package com.meowbie.nyaabot.commands;
 
 import com.meowbie.nyaabot.Constants;
 import com.meowbie.nyaabot.services.GuildService;
+import com.meowbie.nyaabot.utils.EmbedUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-import java.util.Date;
-import java.util.StringJoiner;
+import java.util.*;
+
+import java.awt.Color;
 
 /**
  * This command provides miscellaneous administrative tools for the bot owner.
@@ -69,6 +71,9 @@ public class DeveloperCommand extends ListenerAdapter {
             channel.sendMessage("Successfully updated status to " + status)
                     .queue();
             break;
+        case "servers":
+            sendAllGuilds(event, channel);
+            break;
         default:
             channel.sendMessage("I didn't understand that! Try again?")
                     .queue();
@@ -88,6 +93,30 @@ public class DeveloperCommand extends ListenerAdapter {
         jda.getPresence().setActivity(Activity.playing(status));
     }
 
+    private void sendAllGuilds(MessageReceivedEvent e,
+                               MessageChannelUnion responseChannel) {
+        JDA jda = e.getJDA();
+        List<Guild> guilds = jda.getGuilds();
+        guilds.sort((a, b) -> b.getMembers().size() - a.getMembers().size());
+
+        String embedTitle = "I am in " + guilds.size() + " servers!";
+        String embedDesc = "These are the servers";
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle(embedTitle);
+        eb.setDescription(embedDesc);
+
+        for (Guild guild : guilds) {
+            String guildDesc = guild.getMembers()
+                    + " members (" + guild.getId() + ")";
+
+            eb.addField(guild.getName(), guildDesc, false);
+        }
+
+        EmbedUtil.formatEmbed(eb, e.getAuthor());
+        responseChannel.sendMessageEmbeds(eb.build()).queue();
+    }
+
     private void sendHelpText(MessageReceivedEvent e,
                               MessageChannelUnion responseChannel) {
         String embedTitle = "Developer commands available to you";
@@ -96,6 +125,8 @@ public class DeveloperCommand extends ListenerAdapter {
         String shutdownDesc = "Shuts down the bot immediately";
         String statusText = "status <newStatus>";
         String statusDesc = "Set my playing activity";
+        String serversText = "servers";
+        String serversDesc = "Get all servers I'm in";
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.PINK);
@@ -103,6 +134,7 @@ public class DeveloperCommand extends ListenerAdapter {
         eb.setDescription(embedDesc);
         eb.addField(shutdownText, shutdownDesc, false);
         eb.addField(statusText, statusDesc, false);
+        eb.addField(serversText, serversDesc, false);
         eb.setFooter(new Date().toString(), e.getAuthor().getAvatarUrl());
         responseChannel.sendMessageEmbeds(eb.build()).queue();
     }

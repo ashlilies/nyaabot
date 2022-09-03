@@ -1,6 +1,6 @@
 package com.meowbie.nyaabot.utils;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 public class ColorUtil {

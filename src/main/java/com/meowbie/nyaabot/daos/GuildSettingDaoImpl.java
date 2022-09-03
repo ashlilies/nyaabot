@@ -5,11 +5,11 @@ import com.meowbie.nyaabot.models.GuildSetting;
 import java.sql.*;
 
 public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
-    private static final String FIND_GUILD_SETTING =
+    private static final String FIND_QUERY =
             "SELECT * FROM guild_setting WHERE guild_id = ?";
-    private static final String CREATE_GUILD_SETTING =
+    private static final String CREATE_QUERY =
             "INSERT INTO guild_setting(guild_id, prefix) VALUES (?, ?)";
-    private static final String UPDATE_GUILD_SETTING =
+    private static final String UPDATE_QUERY =
             "UPDATE guild_setting SET guild_id = ?, prefix = ? WHERE id = ?";
 
     @Override
@@ -19,7 +19,7 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
 
         try {
             conn = getConnection();
-            stmt = conn.prepareStatement(FIND_GUILD_SETTING);
+            stmt = conn.prepareStatement(FIND_QUERY);
             stmt.setString(1, guildId);
 
             ResultSet rs = stmt.executeQuery();
@@ -53,7 +53,7 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
 
         try {
             conn = getConnection();
-            stmt = conn.prepareStatement(CREATE_GUILD_SETTING,
+            stmt = conn.prepareStatement(CREATE_QUERY,
                                          Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, guildSetting.getGuildId());
             stmt.setString(2, guildSetting.getPrefix());
@@ -83,7 +83,7 @@ public class GuildSettingDaoImpl extends BaseDao implements GuildSettingDao {
 
         try {
             conn = getConnection();
-            stmt = conn.prepareStatement(UPDATE_GUILD_SETTING);
+            stmt = conn.prepareStatement(UPDATE_QUERY);
             stmt.setString(1, guildSetting.getGuildId());
             stmt.setString(2, guildSetting.getPrefix());
             stmt.setInt(3, guildSetting.getId());

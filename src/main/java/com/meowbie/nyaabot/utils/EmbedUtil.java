@@ -3,7 +3,7 @@ package com.meowbie.nyaabot.utils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Date;
 
 /**
