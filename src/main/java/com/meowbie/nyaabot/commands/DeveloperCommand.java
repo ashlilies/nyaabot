@@ -99,7 +99,7 @@ public class DeveloperCommand extends ListenerAdapter {
         List<Guild> guilds = jda.getGuilds();
         List<Guild> sortedGuilds = new ArrayList<>(guilds);
         sortedGuilds.sort((a, b) ->
-                b.getMembers().size() - a.getMembers().size());
+                b.loadMembers().get().size() - a.loadMembers().get().size());
 
         String embedTitle = "I am in " + sortedGuilds.size() + " servers!";
         String embedDesc = "These are the servers";
@@ -109,7 +109,7 @@ public class DeveloperCommand extends ListenerAdapter {
         eb.setDescription(embedDesc);
 
         for (Guild guild : sortedGuilds) {
-            String guildDesc = guild.getMembers().size()
+            String guildDesc = guild.loadMembers().get().size()
                     + " members (" + guild.getId() + ")";
 
             eb.addField(guild.getName(), guildDesc, false);
