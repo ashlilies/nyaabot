@@ -21,6 +21,8 @@ import java.awt.Color;
  * This command provides miscellaneous administrative tools for the bot owner.
  */
 public class DeveloperCommand extends ListenerAdapter {
+    private static final int MAX_GUILD_LIST_SIZE = 25;
+
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         String message = event.getMessage().getContentRaw();
@@ -97,24 +99,22 @@ public class DeveloperCommand extends ListenerAdapter {
                                MessageChannelUnion responseChannel) {
         JDA jda = e.getJDA();
         List<Guild> guilds = jda.getGuilds();
-        List<Guild> sortedGuilds = new ArrayList<>(guilds);
-        sortedGuilds.sort((a, b) ->
-                b.loadMembers().get().size() - a.loadMembers().get().size());
-
-        String embedTitle = "I am in " + sortedGuilds.size() + " servers!";
-        String embedDesc = "These are the servers";
-
+        String embedTitle = "I am in " + guilds.size() + " servers!";
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle(embedTitle);
-        eb.setDescription(embedDesc);
+        String embedDesc;
 
-        for (Guild guild : sortedGuilds) {
-            String guildDesc = guild.loadMembers().get().size()
-                    + " members (" + guild.getId() + ")";
+        if (guilds.size() < MAX_GUILD_LIST_SIZE) {
+            embedDesc = "These are the servers";
 
-            eb.addField(guild.getName(), guildDesc, false);
+            for (Guild guild : guilds) {
+                eb.addField(guild.getName(), guild.getId(), false);
+            }
+        } else {
+            embedDesc = "There's too many to list down here :(";
         }
 
+        eb.setTitle(embedTitle);
+        eb.setDescription(embedDesc);
         EmbedUtil.formatEmbed(eb, e.getAuthor());
         responseChannel.sendMessageEmbeds(eb.build()).queue();
     }
